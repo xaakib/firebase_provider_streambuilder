@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "627716778596",
+    "project_id": "fir-provider-sterambui",
+    "storage_bucket": "fir-provider-sterambui.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627716778596:android:781cab8a210487348a4d71",
+        "android_client_info": {
+          "package_name": "com.example.firebase_provider_streambuilder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627716778596-bikp2kvta5cik9ecpo2jpm328odifkkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfBv0kBqz5hQPSPT8Dl4Wl7WIRwcFdTKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627716778596-bikp2kvta5cik9ecpo2jpm328odifkkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
