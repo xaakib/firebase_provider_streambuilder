@@ -14,7 +14,7 @@ class _TexEditFieldState extends State<TexEditField> {
 
   Map<String, dynamic> productToAdd;
   CollectionReference collectionReference =
-      Firestore.instance.collection("images");
+      Firestore.instance.collection("secoundImage");
 
   addProduct() {
     productToAdd = {

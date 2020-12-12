@@ -1,7 +1,7 @@
-import 'package:firebase_provider_streambuilder/screens/datainpute.dart';
+import 'package:firebase_provider_streambuilder/screens/data_inpute.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/image_fatch.dart';
+import 'screens/walpaper_screens/image_fatch.dart';
 
 void main() {
   runApp(MyApp());
