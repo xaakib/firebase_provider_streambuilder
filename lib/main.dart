@@ -1,6 +1,8 @@
 import 'package:firebase_provider_streambuilder/screens/datainpute.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/image_fatch.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -47,16 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
+      body: ImageRetive(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

@@ -14,13 +14,13 @@ class _TexEditFieldState extends State<TexEditField> {
 
   Map<String, dynamic> productToAdd;
   CollectionReference collectionReference =
-      Firestore.instance.collection("FirstData");
+      Firestore.instance.collection("images");
 
   addProduct() {
     productToAdd = {
-      "name": nameController.text,
-      "brand": brandController.text,
-      "price": priceController.text,
+      // "name": nameController.text,
+      // "brand": brandController.text,
+      // "price": priceController.text,
       "image": imageUrlController.text,
     };
     collectionReference
@@ -36,21 +36,21 @@ class _TexEditFieldState extends State<TexEditField> {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 5,
-          ),
-          _buildTextField(nameController, "name"),
-          SizedBox(
-            height: 5,
-          ),
-          _buildTextField(brandController, "Brand"),
-          SizedBox(
-            height: 5,
-          ),
-          _buildTextField(priceController, "Price"),
-          SizedBox(
-            height: 5,
-          ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // _buildTextField(nameController, "name"),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // _buildTextField(brandController, "Brand"),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // _buildTextField(priceController, "Price"),
+          // SizedBox(
+          //   height: 5,
+          // ),
           _buildTextField(imageUrlController, "Image Url"),
           SizedBox(
             height: 5,
