@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:firebase_provider_streambuilder/model/movie_models.dart';
+import 'package:firebase_provider_streambuilder/model/food.dart';
 import 'package:flutter/cupertino.dart';
 
 class FoodNotifier with ChangeNotifier {
@@ -8,7 +8,9 @@ class FoodNotifier with ChangeNotifier {
   Food _currentFood;
 
   UnmodifiableListView<Food> get foodList => UnmodifiableListView(_foodList);
+
   Food get currentFood => _currentFood;
+
   set foodList(List<Food> foodList) {
     _foodList = foodList;
     notifyListeners();
@@ -18,22 +20,14 @@ class FoodNotifier with ChangeNotifier {
     _currentFood = food;
     notifyListeners();
   }
-}
 
-class OrangeNotifier with ChangeNotifier {
-  List<Orange> _orangeList = [];
-  Orange _currentOrange;
-
-  UnmodifiableListView<Orange> get orangeList =>
-      UnmodifiableListView(_orangeList);
-  Orange get currentOrange => _currentOrange;
-  set orangeList(List<Orange> orangeList) {
-    _orangeList = orangeList;
+  addFood(Food food) {
+    _foodList.insert(0, food);
     notifyListeners();
   }
 
-  set currentOrange(Orange orange) {
-    _currentOrange = orange;
+  deleteFood(Food food) {
+    _foodList.removeWhere((_food) => _food.id == food.id);
     notifyListeners();
   }
 }
