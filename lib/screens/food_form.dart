@@ -134,6 +134,18 @@ class _FoodFormState extends State<FoodForm> {
     );
   }
 
+  Widget _buildImageUrlField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: 'Image Url'),
+      initialValue: _currentFood.image,
+      keyboardType: TextInputType.text,
+      style: TextStyle(fontSize: 20),
+      onSaved: (String value) {
+        _currentFood.image = value;
+      },
+    );
+  }
+
   Widget _buildCategoryField() {
     return TextFormField(
       decoration: InputDecoration(labelText: 'Category'),
@@ -239,6 +251,7 @@ class _FoodFormState extends State<FoodForm> {
                   )
                 : SizedBox(height: 0),
             _buildNameField(),
+            _buildImageUrlField(),
             _buildCategoryField(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,27 +267,29 @@ class _FoodFormState extends State<FoodForm> {
               ],
             ),
             SizedBox(height: 16),
-            GridView.count(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.all(8),
-              crossAxisCount: 3,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
-              children: _subingredients
-                  .map(
-                    (ingredient) => Card(
-                      color: Colors.black54,
-                      child: Center(
-                        child: Text(
+            Container(
+              height: 164,
+              width: MediaQuery.of(context).size.width,
+              child: GridView.count(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                crossAxisCount: 1,
+                crossAxisSpacing: 4,
+                mainAxisSpacing: 10,
+                children: _subingredients
+                    .map(
+                      (ingredient) => Card(
+                        child: Image.network(
                           ingredient,
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          fit: BoxFit.fill,
+                          height: 150,
+                          width: 250,
                         ),
                       ),
-                    ),
-                  )
-                  .toList(),
-            )
+                    )
+                    .toList(),
+              ),
+            ),
           ]),
         ),
       ),

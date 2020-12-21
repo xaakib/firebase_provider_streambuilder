@@ -51,28 +51,29 @@ class FoodDetail extends StatelessWidget {
                       fontSize: 18, decoration: TextDecoration.underline),
                 ),
                 SizedBox(height: 16),
-                GridView.count(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  padding: EdgeInsets.all(8),
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 4,
-                  mainAxisSpacing: 4,
-                  children: foodNotifier.currentFood.subIngredients
-                      .map(
-                        (ingredient) => Card(
-                          color: Colors.black54,
-                          child: Center(
-                            child: Text(
+                Container(
+                  height: 164,
+                  width: MediaQuery.of(context).size.width,
+                  child: GridView.count(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 10,
+                    children: foodNotifier.currentFood.subIngredients
+                        .map(
+                          (ingredient) => Card(
+                            child: Image.network(
                               ingredient,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                              fit: BoxFit.fill,
+                              height: 150,
+                              width: 250,
                             ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                )
+                        )
+                        .toList(),
+                  ),
+                ),
               ],
             ),
           ),
