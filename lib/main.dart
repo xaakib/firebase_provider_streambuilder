@@ -1,63 +1,54 @@
-import 'package:firebase_provider_streambuilder/screens/data_inpute.dart';
+import 'package:firebase_provider_streambuilder/screens/feed.dart';
+import 'package:firebase_provider_streambuilder/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'screens/walpaper_screens/image_fatch.dart';
+import 'notifier/auth_notifier.dart';
+import 'notifier/provider_notifier.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        // ignore: missing_required_param
+        ChangeNotifierProvider<AuthNotifier>(
+          create: (context) => AuthNotifier(),
+        ),
+        // ignore: missing_required_param
+        ChangeNotifierProvider<FoodNotifier>(
+          create: (context) => FoodNotifier(),
+        ),
+        ChangeNotifierProvider<OrangeNotifier>(
+          create: (context) => OrangeNotifier(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+      // home: Consumer<AuthNotifier>(
+      //   builder: (context, notifier, child) {
+      //     return notifier.user != null ? Feed() : Login();
+      //   },
+      // ),
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: ImageRetive(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => TexEditField()));
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: Feed(),
     );
   }
 }
