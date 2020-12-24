@@ -1,3 +1,4 @@
+import 'package:firebase_provider_streambuilder/model/ad_manager.dart';
 import 'package:firebase_provider_streambuilder/screens/feed.dart';
 import 'package:firebase_provider_streambuilder/screens/login.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,11 @@ import 'notifier/food_notifier.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
+
+        WidgetsFlutterBinding.ensureInitialized();
+        Admob.initialize(AdManager.appId);
+
+
         ChangeNotifierProvider(
           create: (context) => AuthNotifier(),
         ),
