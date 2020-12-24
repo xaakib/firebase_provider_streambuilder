@@ -1,4 +1,6 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_provider_streambuilder/api/food_api.dart';
+import 'package:firebase_provider_streambuilder/model/ad_manager.dart';
 import 'package:firebase_provider_streambuilder/notifier/auth_notifier.dart';
 import 'package:firebase_provider_streambuilder/notifier/food_notifier.dart';
 import 'package:firebase_provider_streambuilder/screens/detail.dart';
@@ -25,10 +27,6 @@ class _FeedState extends State<Feed> {
   Widget build(BuildContext context) {
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
     FoodNotifier foodNotifier = Provider.of<FoodNotifier>(context);
-
-    Future<void> _refreshList() async {
-      getFoods(foodNotifier);
-    }
 
     print("building Feed");
     return Scaffold(
