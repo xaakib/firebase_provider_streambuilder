@@ -52,8 +52,8 @@ class _FeedState extends State<Feed> {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               leading: Image.network(
-                foodNotifier.foodList[index].image != null
-                    ? foodNotifier.foodList[index].image
+                foodNotifier.foodList[index].imageurl != null
+                    ? foodNotifier.foodList[index].imageurl
                     : 'https://www.testingxperts.com/wp-content/uploads/2019/02/placeholder-img.jpg',
                 width: 120,
                 fit: BoxFit.fitWidth,

@@ -119,7 +119,7 @@ _uploadFood(Food food, bool isUpdating, Function foodUploaded,
   CollectionReference foodRef = Firestore.instance.collection('Foods');
 
   if (imageUrl != null) {
-    food.image = imageUrl;
+    food.imageurl = imageUrl;
   }
 
   if (isUpdating) {
@@ -145,9 +145,9 @@ _uploadFood(Food food, bool isUpdating, Function foodUploaded,
 }
 
 deleteFood(Food food, Function foodDeleted) async {
-  if (food.image != null) {
+  if (food.imageurl != null) {
     StorageReference storageReference =
-        await FirebaseStorage.instance.getReferenceFromUrl(food.image);
+        await FirebaseStorage.instance.getReferenceFromUrl(food.imageurl);
 
     print(storageReference.path);
 

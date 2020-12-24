@@ -39,7 +39,7 @@ class _FoodFormState extends State<FoodForm> {
     }
 
     _subingredients.addAll(_currentFood.subIngredients);
-    _imageUrl = _currentFood.image;
+    _imageUrl = _currentFood.imageurl;
   }
 
   _showImage() {
@@ -100,7 +100,6 @@ class _FoodFormState extends State<FoodForm> {
   }
 
   _getLocalImage() async {
-    // ignore: deprecated_member_use
     File imageFile = await ImagePicker.pickImage(
         source: ImageSource.gallery, imageQuality: 50, maxWidth: 400);
 
@@ -134,14 +133,25 @@ class _FoodFormState extends State<FoodForm> {
     );
   }
 
-  Widget _buildImageUrlField() {
+  Widget _buiImageUrlField() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Image Url'),
-      initialValue: _currentFood.image,
+      decoration: InputDecoration(labelText: 'ImageUrl'),
+      initialValue: _currentFood.imageurl,
       keyboardType: TextInputType.text,
       style: TextStyle(fontSize: 20),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'ImageURl is required';
+        }
+
+        if (value.length < 3 || value.length > 400) {
+          return 'Name must be more than 3 and less than 20';
+        }
+
+        return null;
+      },
       onSaved: (String value) {
-        _currentFood.image = value;
+        _currentFood.imageurl = value;
       },
     );
   }
@@ -228,7 +238,6 @@ class _FoodFormState extends State<FoodForm> {
         padding: EdgeInsets.all(32),
         child: Form(
           key: _formKey,
-          // ignore: deprecated_member_use
           autovalidate: true,
           child: Column(children: <Widget>[
             _showImage(),
@@ -251,7 +260,7 @@ class _FoodFormState extends State<FoodForm> {
                   )
                 : SizedBox(height: 0),
             _buildNameField(),
-            _buildImageUrlField(),
+            _buiImageUrlField(),
             _buildCategoryField(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,29 +276,27 @@ class _FoodFormState extends State<FoodForm> {
               ],
             ),
             SizedBox(height: 16),
-            Container(
-              height: 164,
-              width: MediaQuery.of(context).size.width,
-              child: GridView.count(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                crossAxisCount: 1,
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 10,
-                children: _subingredients
-                    .map(
-                      (ingredient) => Card(
-                        child: Image.network(
+            GridView.count(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.all(8),
+              crossAxisCount: 3,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+              children: _subingredients
+                  .map(
+                    (ingredient) => Card(
+                      color: Colors.black54,
+                      child: Center(
+                        child: Text(
                           ingredient,
-                          fit: BoxFit.fill,
-                          height: 150,
-                          width: 250,
+                          style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                       ),
-                    )
-                    .toList(),
-              ),
-            ),
+                    ),
+                  )
+                  .toList(),
+            )
           ]),
         ),
       ),

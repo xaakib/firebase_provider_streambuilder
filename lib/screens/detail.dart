@@ -1,10 +1,7 @@
-import 'package:firebase_provider_streambuilder/api/food_api.dart';
 import 'package:firebase_provider_streambuilder/model/food.dart';
 import 'package:firebase_provider_streambuilder/notifier/food_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'food_form.dart';
 
 class FoodDetail extends StatelessWidget {
   final double expanded_height = 400;
@@ -19,34 +16,6 @@ class FoodDetail extends StatelessWidget {
     }
 
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FloatingActionButton(
-            heroTag: 'button1',
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return FoodForm(
-                    isUpdating: true,
-                  );
-                }),
-              );
-            },
-            child: Icon(Icons.edit),
-            foregroundColor: Colors.white,
-          ),
-          SizedBox(height: 20),
-          FloatingActionButton(
-            heroTag: 'button2',
-            onPressed: () =>
-                deleteFood(foodNotifier.currentFood, _onFoodDeleted),
-            child: Icon(Icons.delete),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-          ),
-        ],
-      ),
       appBar: AppBar(
         title: Text(foodNotifier.currentFood.name),
       ),
@@ -82,7 +51,7 @@ class FoodDetail extends StatelessWidget {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: Image.network(
-                                      foodNotifier.currentFood.image,
+                                      foodNotifier.currentFood.imageurl,
                                       fit: BoxFit.cover,
                                       height: 50,
                                       width: 50,
@@ -246,7 +215,7 @@ class DetailsSliverDelegate extends SliverPersistentHeaderDelegate {
     return Stack(
       children: [
         Image.network(
-          foodNotifier.currentFood.image,
+          foodNotifier.currentFood.imageurl,
           width: MediaQuery.of(context).size.width,
           height: expandedheight,
           fit: BoxFit.cover,
