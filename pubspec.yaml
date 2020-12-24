@@ -33,7 +33,7 @@ dependencies:
   provider: ^3.1.0
   image_picker: ^0.6.7+2
   firebase_storage: ^3.1.6
-  admob_flutter: ^0.3.4
+  firebase_admob: ^0.9.3
 
   path: ^1.7.0
   uuid: ^2.1.0

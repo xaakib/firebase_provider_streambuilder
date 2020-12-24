@@ -1,4 +1,4 @@
-import 'package:admob_flutter/admob_flutter.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_provider_streambuilder/api/food_api.dart';
 import 'package:firebase_provider_streambuilder/model/ad_manager.dart';
 import 'package:firebase_provider_streambuilder/notifier/auth_notifier.dart';
@@ -15,8 +15,32 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
+  InterstitialAd myInterstitial;
+
   @override
   void initState() {
+    FirebaseAdMob.instance.initialize(appId: AdManager.appId);
+
+    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['flutterio', 'beautiful apps'],
+      contentUrl: 'https://flutter.io',
+      birthday: DateTime.now(),
+      childDirected: false,
+      // ignore: deprecated_member_use
+      designedForFamilies: false,
+      // ignore: deprecated_member_use
+      gender: MobileAdGender
+          .male, // or MobileAdGender.female, MobileAdGender.unknown
+      testDevices: <String>[], // Android emulators are considered test devices
+    );
+    myInterstitial = InterstitialAd(
+      adUnitId: InterstitialAd.testAdUnitId,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event is $event");
+      },
+    );
+
     FoodNotifier foodNotifier =
         Provider.of<FoodNotifier>(context, listen: false);
     getFoods(foodNotifier);
@@ -25,6 +49,13 @@ class _FeedState extends State<Feed> {
 
   @override
   Widget build(BuildContext context) {
+    myInterstitial
+      ..load()
+      ..show(
+        anchorType: AnchorType.bottom,
+        anchorOffset: 0.0,
+        horizontalCenterOffset: 0.0,
+      );
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
     FoodNotifier foodNotifier = Provider.of<FoodNotifier>(context);
 
@@ -110,6 +141,9 @@ class _FeedState extends State<Feed> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // AdmobBanner(
+        //         adUnitId: AdManager.bannerId, adSize: AdmobBannerSize.BANNER),
+
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
