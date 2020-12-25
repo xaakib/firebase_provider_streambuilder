@@ -100,6 +100,7 @@ class _FoodFormState extends State<FoodForm> {
   }
 
   _getLocalImage() async {
+    // ignore: deprecated_member_use
     File imageFile = await ImagePicker.pickImage(
         source: ImageSource.gallery, imageQuality: 50, maxWidth: 400);
 
@@ -167,7 +168,7 @@ class _FoodFormState extends State<FoodForm> {
           return 'Category is required';
         }
 
-        if (value.length < 3 || value.length > 20) {
+        if (value.length < 3 || value.length > 900) {
           return 'Category must be more than 3 and less than 20';
         }
 

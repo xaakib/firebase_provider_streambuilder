@@ -15,32 +15,29 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  InterstitialAd myInterstitial;
+  InterstitialAd _interstitialAd;
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      childDirected: true, keywords: ['movie', 'song', 'funny']);
+
+  InterstitialAd buildInterstitial() {
+    return InterstitialAd(
+      adUnitId: AdManager.intersial,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event $event");
+        if (event == MobileAdEvent.failedToLoad) {
+          _interstitialAd.load();
+        } else if (event == MobileAdEvent.closed) {
+          _interstitialAd = buildInterstitial()..load();
+        }
+      },
+    );
+  }
 
   @override
   void initState() {
     FirebaseAdMob.instance.initialize(appId: AdManager.appId);
-
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-      keywords: <String>['flutterio', 'beautiful apps'],
-      contentUrl: 'https://flutter.io',
-      birthday: DateTime.now(),
-      childDirected: false,
-      // ignore: deprecated_member_use
-      designedForFamilies: false,
-      // ignore: deprecated_member_use
-      gender: MobileAdGender
-          .male, // or MobileAdGender.female, MobileAdGender.unknown
-      testDevices: <String>[], // Android emulators are considered test devices
-    );
-    myInterstitial = InterstitialAd(
-      adUnitId: InterstitialAd.testAdUnitId,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("InterstitialAd event is $event");
-      },
-    );
-
+    _interstitialAd = buildInterstitial()..load();
     FoodNotifier foodNotifier =
         Provider.of<FoodNotifier>(context, listen: false);
     getFoods(foodNotifier);
@@ -48,14 +45,13 @@ class _FeedState extends State<Feed> {
   }
 
   @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    myInterstitial
-      ..load()
-      ..show(
-        anchorType: AnchorType.bottom,
-        anchorOffset: 0.0,
-        horizontalCenterOffset: 0.0,
-      );
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
     FoodNotifier foodNotifier = Provider.of<FoodNotifier>(context);
 
@@ -147,7 +143,7 @@ class _FeedState extends State<Feed> {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
-            "Food",
+            "Korean",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -162,6 +158,10 @@ class _FeedState extends State<Feed> {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
+                  _interstitialAd
+                    ..load()
+                    ..show();
+
                   foodNotifier.currentFood = foodNotifier.foodList[index];
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return FoodDetail();
@@ -196,7 +196,7 @@ class _FeedState extends State<Feed> {
                               SizedBox(
                                 height: 2,
                               ),
-                              Text((foodNotifier.foodList[index].category
+                              Text((foodNotifier.foodList[index].name
                                   .toString())),
                             ],
                           ),

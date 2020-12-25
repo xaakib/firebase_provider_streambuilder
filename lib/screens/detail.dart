@@ -16,172 +16,172 @@ class FoodDetail extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(foodNotifier.currentFood.name),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          buildSliverPersistentHeader(foodNotifier),
-          SliverToBoxAdapter(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ///
-                    ///
-                    ///
-                    //  titile of movie name and shear
-                    ///
-                    ///
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // _buildMovieinfo(populer),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            buildSliverPersistentHeader(foodNotifier),
+            SliverToBoxAdapter(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ///
+                      ///
+                      ///
+                      //  titile of movie name and shear
+                      ///
+                      ///
 
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 10),
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: Image.network(
-                                      foodNotifier.currentFood.imageurl,
-                                      fit: BoxFit.cover,
-                                      height: 50,
-                                      width: 50,
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // _buildMovieinfo(populer),
+
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: Image.network(
+                                        foodNotifier.currentFood.imageurl,
+                                        fit: BoxFit.cover,
+                                        height: 50,
+                                        width: 50,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          foodNotifier.currentFood.name,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            foodNotifier.currentFood.name,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          foodNotifier.currentFood.category,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                          Text(
+                                            foodNotifier.currentFood.name,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Spacer(),
-                                  IconButton(
-                                      icon: Icon(Icons.share),
-                                      onPressed: () {}),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-// ...
-
-                        //  Introduction of movie
-                        foodNotifier.currentFood.category,
-                        style: TextStyle(
-                          color: Colors.black45,
-                          height: 1.4,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "Screenshorts",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        height: 1.4,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 164,
-                      width: MediaQuery.of(context).size.width,
-                      child: GridView.count(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        crossAxisCount: 1,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 10,
-                        children: foodNotifier.currentFood.subIngredients
-                            .map(
-                              (ingredient) => Card(
-                                child: Image.network(
-                                  ingredient,
-                                  fit: BoxFit.fill,
-                                  height: 150,
-                                  width: 250,
+                                    Spacer(),
+                                    IconButton(
+                                        icon: Icon(Icons.share),
+                                        onPressed: () {}),
+                                  ],
                                 ),
                               ),
-                            )
-                            .toList(),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Requarment",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            height: 1.4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "View all",
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        child: Text(
+// ...
+
+                          //  Introduction of movie
+                          foodNotifier.currentFood.category,
+                          style: TextStyle(
+                            color: Colors.black45,
+                            height: 1.4,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Screenshorts",
+                        style: TextStyle(
+                          color: Colors.black87,
+                          height: 1.4,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 164,
+                        width: MediaQuery.of(context).size.width,
+                        child: GridView.count(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 4,
+                          mainAxisSpacing: 10,
+                          children: foodNotifier.currentFood.subIngredients
+                              .map(
+                                (ingredient) => Card(
+                                  child: Image.network(
+                                    ingredient,
+                                    fit: BoxFit.fill,
+                                    height: 150,
+                                    width: 250,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Requarment",
                             style: TextStyle(
-                              color: Colors.red,
+                              color: Colors.black87,
                               height: 1.4,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                color: Colors.red,
+                                height: 1.4,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
 
-                    //This the Requerment Class
-                    // Requerment(),
-                  ],
+                      //This the Requerment Class
+                      // Requerment(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -241,6 +241,9 @@ class DetailsSliverDelegate extends SliverPersistentHeaderDelegate {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                height: 20,
+              ),
               Text(
                 foodNotifier.currentFood.name,
                 style: TextStyle(
@@ -251,7 +254,7 @@ class DetailsSliverDelegate extends SliverPersistentHeaderDelegate {
                 ),
               ),
               Text(
-                foodNotifier.currentFood.category,
+                foodNotifier.currentFood.name,
                 style: TextStyle(
                   color: Colors.white,
                   backgroundColor: Colors.black26,

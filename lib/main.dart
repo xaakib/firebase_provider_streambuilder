@@ -1,4 +1,3 @@
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_provider_streambuilder/notifier/food_notifier.dart';
 import 'package:firebase_provider_streambuilder/screens/feed.dart';
 import 'package:firebase_provider_streambuilder/screens/login.dart';
